@@ -23,3 +23,5 @@ const guru = sequelize.define('gurus', {
     tableName: 'guru',
     freezeTableName: true
 })
+
+module.exports = guru;
