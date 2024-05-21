@@ -1,39 +1,30 @@
+const { where } = require("../db/config")
 const guru = require("../db/tables/guru")
 
 async function getUsernameGuru(username) {
     try {
         const dataGuru = await guru.findOne({
-            where: {username: username}
+            where: { username: username }
         })
         return dataGuru
     }
-    catch(error) {
+    catch (error) {
 
     }
 }
 
 async function getUsernameGuruByID(id) {
-    try{
+    try {
         const dataGuru = await guru.findOne({
-            where: {id: id}
+            where: { id: id }
         })
         return dataGuru
- 
+
     }
-    catch(error){
+    catch (error) {
 
     }
 }
 
-async function getDataGuru() {
-    
-}
 
-
-module.exports = {getUsernameGuru, getUsernameGuruByID}
-
-// async function get() {
-//     const res = await getUsernameGuru('fadhil_one_')
-//     console.log(res)
-// }
-// get()
+module.exports = { getUsernameGuru, getUsernameGuruByID }
