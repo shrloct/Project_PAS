@@ -31,3 +31,6 @@ create table event (
     createdAt timestamp default current_timestamp,
     updatedAt timestamp default current_timestamp on update current_timestamp
 );
+
+ALTER TABLE guru
+MODIFY COLUMN password VARCHAR(100);

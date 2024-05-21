@@ -1,0 +1,14 @@
+http://localhost:3000/api/guru/create -> untuk register akun guru;
+method: post,
+req.body: {
+    "name": "M. Dzikri Fauzan",
+    "username": "dzikri.f",
+    "password": "dzikri123"
+}
+
+*notes express-validator tidak berfungsi
+*notes beralih ke validator
+
+--
+http://localhost:3000/api/guru -> untuk ngambil data guru
+method: GET
