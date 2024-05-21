@@ -29,7 +29,7 @@ async function registerGuru(req, res) {
       body("password").notEmpty().withMessage("Password is required")
     ];
 
-    // const resValidation = await runValidation(validation, req)
+    const resValidation = await runValidation(validation, req)
     if(resValidation) return responseHelpers(res, 422, {status: false, message: 'Error validation fields', error: resValidation});
 
     try {
