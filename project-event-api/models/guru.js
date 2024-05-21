@@ -17,6 +17,7 @@ async function getUsernameGuruByID(id) {
         const dataGuru = await guru.findOne({
             where: {id: id}
         })
+        return dataGuru
  
     }
     catch(error){

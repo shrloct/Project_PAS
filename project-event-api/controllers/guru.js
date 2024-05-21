@@ -34,7 +34,7 @@ async function registerGuru(req, res) {
 
     try {
         //check username of database
-        const existingUsername = await getUsernameGuru(username)
+        const existingUsername = await getUsernameGuru(username) 
         if(existingUsername !== null) return responseHelpers(res, 409, {message: 'username already exist'})
 
         //hash and generateID

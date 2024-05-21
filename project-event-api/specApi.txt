@@ -12,3 +12,13 @@ req.body: {
 --
 http://localhost:3000/api/guru -> untuk ngambil data guru
 method: GET
+
+
+http://localhost:3000/auth/login -> untuk login (sahrul)
+method: POST,
+body: {
+    "username": "",
+    "password": ""
+}
+
+*notes kalau ngambil username harus ada, kalau ga ada return responseHelpers(res, 400, {message: 'username not found'})
