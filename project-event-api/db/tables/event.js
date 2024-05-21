@@ -24,6 +24,23 @@ const event = sequelize.define('event', {
         allowNull: false
     },
     date: {
-
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    location: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    max_participant: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
