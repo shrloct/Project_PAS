@@ -1,12 +1,11 @@
 const runValidation = require("../helpers/runValidation");
 const responseHelpers = require("../helpers/responseHelper");
 const { getUsernameGuru } = require("../models/guru");
-const guru = require("../db/tables/guru");
 const generateId = require("../helpers/generateId");
 const { hashPassword } = require("../helpers/hash");
 const { body, validationResult } = require('express-validator');
-const guru = require("../db/tables/guru");
 const generateToken = require("../helpers/generateToken");
+const guru = require("../db/tables/guru");
 
 async function getDataGuru(req, res) {
     try {
@@ -63,8 +62,6 @@ async function registerGuru(req, res) {
 async function loginGuru(req, res) {
     try {
         const { username, password } = req.body;
-        // Validate password
-
 
         const dataGuru = await getUsernameGuru(username)
         console.log(dataGuru)
@@ -82,4 +79,4 @@ async function loginGuru(req, res) {
 }
 
 
-module.exports = { registerGuru, getDataGuru }
+module.exports = { registerGuru, getDataGuru, loginGuru }
