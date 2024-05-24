@@ -4,14 +4,15 @@ const responseHelpers = require("../helpers/responseHelper");
 
 
 async function addEvent(req, res) {
+    const { name, description, category, event_date, location, max_participant, status, email } = req.body
 
-    const { name, description, category, date, location, max_participant, status, email } = req.body
-
-    const guru_id = req.guru.id
+    const guru_id = req.data.id
 
     //tambahin rull sesuai yang di atas, kalau bukan email jangan tambahin isEmail
     const id = await generateId(10)
+
     try {
+
         await event.create({
             id,
             guru_id,
@@ -35,11 +36,10 @@ async function addEvent(req, res) {
 };
 
 async function updatedEvent(req, res) {
-    const { name, description, location, max_participant } = req.body;
-    const eventId = 'g65W13oOIK';
+    const { name, description, category, event_date, location, max_participant, status, email } = req.body;
 
     try {
-        const [updated] = await Event.update(
+        const [updated] = await event.update(
             {
                 name,
                 description,
@@ -47,10 +47,11 @@ async function updatedEvent(req, res) {
                 event_date,
                 location,
                 max_participant,
+                status,
                 email
             },
             {
-                where: { id: eventId }
+                where: { id: event }
             }
         );
 
@@ -66,14 +67,17 @@ async function updatedEvent(req, res) {
 }
 
 async function deleteEvent(req, res) {
-    const event_id = 'g65Nl30OIK';
     try {
-        await id.event.delete({
+        await event.destroy({
             where: {
-                id: event_id
+                id: req.params.id
             }
         });
-        return responseHelpers(res, 201, { message: 'Successfully delete event' });
+        if (deleted) {
+            return responseHelpers(res, 200, { message: 'Successfully deleted event' });
+        } else {
+            return responseHelpers(res, 404, { message: 'event not found' });
+        }
     } catch (error) {
         console.log(error);
         return responseHelpers(res, 500, { message: 'Internal server error' });

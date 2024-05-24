@@ -4,7 +4,8 @@ require('dotenv').config()
 
 async function authentication(req, res, next) {
     const token = req.headers.authorization;
-    if(!token) return responseHelpers(res, 401, {status: false, message: 'No token'});
+    console.log(req.headers)
+    if(token === null) return responseHelpers(res, 401, {status: false, message: 'No token'});
     jwt.verify(token, process.env.API_KEY, (err, decoded) => {
         if(err) return responseHelpers(res, 401, {status: false, message: 'Invalid token'});
         req.data = decoded;

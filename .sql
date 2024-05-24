@@ -10,6 +10,7 @@ create table guru (
 );
 
 create table category (
+    id int unique primary key,
     name varchar(30) not null primary key,
     createdAt timestamp default current_timestamp,
     updatedAt timestamp default current_timestamp on update current_timestamp

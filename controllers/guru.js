@@ -9,12 +9,12 @@ async function getDataGuru(req, res) {
     try {
         //get data tetapi tidak ngambil password, createdAt, updatedAt
         const data = await guru.findAll({
-            attributes: {exclude: ['password', 'createdAt', 'updatedAt']}
+            attributes: { exclude: ['password', 'createdAt', 'updatedAt'] }
         })
         return responseHelpers(res, 200, data);
     }
-    catch {
-        return responseHelpers(res, 500, {message: 'Internal server error'});
+    catch (error) {
+        return responseHelpers(res, 500, { message: 'Internal server error' });
     }
 
 }
@@ -23,8 +23,8 @@ async function registerGuru(req, res) {
 
     try {
         //check username of database
-        const existingUsername = await getDataGuruByUsername(username) 
-        if(existingUsername !== null) return responseHelpers(res, 409, {message: 'username already exist'})
+        const existingUsername = await getDataGuruByUsername(username)
+        if (existingUsername !== null) return responseHelpers(res, 409, { message: 'username already exist' })
 
         //hash and generateID
         const hashedPassword = await hashPassword(password)
@@ -34,11 +34,11 @@ async function registerGuru(req, res) {
         await guru.create({
             id: idGuru, name, username, password: hashedPassword
         })
-        return responseHelpers(res, 201, {message: 'Successfully created teacher account'})
+        return responseHelpers(res, 201, { message: 'Successfully created teacher account' })
     }
-    catch(error) {
+    catch (error) {
         console.log(error)
-        return responseHelpers(res, 500, {message: 'Internal server error'})
+        return responseHelpers(res, 500, { message: 'Internal server error' })
     }
 }
 
@@ -47,24 +47,26 @@ async function loginGuru(req, res) {
     try {
         //check username of database
         const existingUsername = await getDataGuruByUsername(username)
-        if(existingUsername === null) return responseHelpers(res, 404, {message: 'username not found'})
+        console.log(existingUsername)
+        if (existingUsername == null) return responseHelpers(res, 404, { message: 'username not found' })
 
         const dataGuru = existingUsername;
-        // console.log(dataGuru)
         const isValidPassword = await comparePassword(password, dataGuru.dataValues.password)
 
-        if(!isValidPassword) return responseHelpers(res, 404, {message: 'Invalid password'})
+        if (!isValidPassword) return responseHelpers(res, 404, { message: 'Invalid password' })
+
         delete dataGuru.dataValues.password
         const token = await generateToken(dataGuru.dataValues)
 
-        return responseHelpers(res, 200, {status: true, token})
+        return responseHelpers(res, 200, { status: true, token })
+
 
     }
-    catch(error) {
+    catch (error) {
         console.log(error)
-        return responseHelpers(res, 500, {message: 'Internal server error'})
+        return responseHelpers(res, 500, { message: 'Internal server error' })
     }
 }
 
 
-module.exports = {registerGuru, getDataGuru, loginGuru}
+module.exports = { registerGuru, getDataGuru, loginGuru }
