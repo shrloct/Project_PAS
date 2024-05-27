@@ -1,5 +1,5 @@
 const { where } = require("sequelize");
-const category = require("../db/tables/category");
+const category = require('../db/tables/category')
 const generateId = require("../helpers/generateId");
 const responseHelpers = require("../helpers/responseHelper");
 

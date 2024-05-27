@@ -3,12 +3,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var gurusRouter = require('./routes/guru');
 var eventRouter = require('./routes/event');
 var categoryRouter = require('./routes/category');
-var authRouter = require('./routes/auth');
 
 var app = express();
 
@@ -18,12 +15,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/api/guru', gurusRouter);
-app.use('/api/data/event', eventRouter);
-app.use('/api', authRouter);
+app.use('/api/data/event', eventRouter)
 app.use('/api/category', categoryRouter);
+
 
 app.listen(3000, () => console.log('Server running'))
 // module.exports = app;

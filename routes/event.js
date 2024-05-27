@@ -1,6 +1,6 @@
 var express = require('express')
 const { body } = require('express-validator')
-const { addEvent, deleteEvent, updatedEvent } = require('../controllers/event')
+const { addEvent, deleteEvent, updatedEvent, getDataEvent } = require('../controllers/event')
 const validate = require('../middleware/validate')
 const authentication = require('../middleware/authentication')
 const router = express.Router()
@@ -17,8 +17,9 @@ const validations = [
 ]
 
 // router.post('/create', addEvent)
+router.get('/', getDataEvent)
 router.post('/create', authentication, validate(validations), addEvent);
 router.put('/update/:id', authentication, validate(validations), updatedEvent);
-router.delete('/delete/:id', deleteEvent);
+router.delete('/delete/:id', authentication, deleteEvent);
 
 module.exports = router

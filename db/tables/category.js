@@ -8,7 +8,7 @@ const category = sequelize.define('category', {
     }
 }, {
     tableName: 'category',
-    freezeTableName: false
-});
+    freezeTableName: true
+})
 
-module.exports = category;
+module.exports = category
